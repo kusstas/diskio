@@ -1,0 +1,19 @@
+[package]
+name = "diskio"
+edition = "2021"
+description = "Diskio library provides trait for handling disk IO devices."
+repository = "https://github.com/kusstas/diskio"
+documentation = "https://docs.rs/crate/diskio"
+categories = ["embedded", "hardware-support", "no-std"]
+keywords = ["diskio", "disk", "drive", "embedded"]
+version = "0.1.0"
+license = "MIT OR Apache-2.0"
+readme = "README.md"
+exclude = [
+    ".vscode/*",
+]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+flagset = "^0.4.3"
