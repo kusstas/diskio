@@ -11,6 +11,8 @@ flags! {
         NotInitialized = 0x01,
         /// Drive is write protected.
         WriteProtected = 0x02,
+        /// Error occured.
+        ErrorOccured = 0x04,
     }
 }
 
@@ -72,7 +74,10 @@ pub trait DiskioDevice {
     /// Get status of device.
     fn status(&self) -> Status;
 
-    /// Initialize  device.
+    /// Reset device (optional).
+    fn reset(&mut self) {}
+
+    /// Initialize device.
     fn initialize(&mut self) -> Result<(), Error<Self::DeviceError>>;
 
     /// Read data blocks from device by address.
