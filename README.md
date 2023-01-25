@@ -13,7 +13,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-diskio = "0.1.1"
+diskio = "0.1.2"
 ```
 
 ## Documentation

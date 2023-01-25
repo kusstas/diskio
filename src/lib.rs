@@ -48,8 +48,8 @@ pub enum Error<T> {
     WriteProtected,
     /// Invalid argument passed to device methods.
     InvalidArgument,
-    /// Device error occurred.
-    Device(T),
+    /// Hardware error occurred.
+    Hardware(T),
 }
 
 /// Ioctl commands.
@@ -69,7 +69,7 @@ pub enum IoctlCmd<'a> {
 /// Represents disk IO device.
 pub trait DiskioDevice {
     /// Device error type.
-    type DeviceError;
+    type HardwareError;
 
     /// Get status of device.
     fn status(&self) -> Status;
@@ -78,14 +78,14 @@ pub trait DiskioDevice {
     fn reset(&mut self) {}
 
     /// Initialize device.
-    fn initialize(&mut self) -> Result<(), Error<Self::DeviceError>>;
+    fn initialize(&mut self) -> Result<(), Error<Self::HardwareError>>;
 
     /// Read data blocks from device by address.
-    fn read(&self, buf: &mut [u8], address: Lba) -> Result<(), Error<Self::DeviceError>>;
+    fn read(&self, buf: &mut [u8], lba: Lba) -> Result<(), Error<Self::HardwareError>>;
 
     /// Write data blocks to device by address.
-    fn write(&self, buf: &[u8], address: Lba) -> Result<(), Error<Self::DeviceError>>;
+    fn write(&self, buf: &[u8], lba: Lba) -> Result<(), Error<Self::HardwareError>>;
 
     /// Make ioctl query to device.
-    fn ioctl(&self, cmd: IoctlCmd) -> Result<(), Error<Self::DeviceError>>;
+    fn ioctl(&self, cmd: IoctlCmd) -> Result<(), Error<Self::HardwareError>>;
 }
